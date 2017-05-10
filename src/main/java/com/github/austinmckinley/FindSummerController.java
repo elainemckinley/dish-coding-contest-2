@@ -1,6 +1,5 @@
 package com.github.austinmckinley;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import static java.util.Collections.emptyList;
@@ -18,19 +16,13 @@ import static java.util.stream.Collectors.toList;
 
 @RestController
 public class FindSummerController {
-
-    @Autowired
-    public FindSummerController() {
-
-    }
-
     @RequestMapping(value = "/findSummer", method = RequestMethod.PUT)
-    public ResponseEntity<List<String>> findSummer(@RequestBody SummerRequest summerRequest) {
+    public ResponseEntity<SummerResponse> findSummer(@RequestBody SummerRequest summerRequest) {
         List<String> strings = doLogic(summerRequest);
         if (strings.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
-            return new ResponseEntity<>(strings, HttpStatus.OK);
+            return new ResponseEntity<>(new SummerResponse(strings), HttpStatus.OK);
         }
     }
 

@@ -11,8 +11,8 @@ public class SummerRequest {
     @JsonCreator
     public SummerRequest(
             @JsonProperty("total") int total,
-            @JsonProperty("total") int min,
-            @JsonProperty("total") int max
+            @JsonProperty("min") int min,
+            @JsonProperty("max") int max
     ) {
         this.total = total;
         this.min = min;
